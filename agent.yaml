@@ -7,20 +7,13 @@ metadata:
 spec:
   containers:
     - name: jnlp
-      image: jenkins/inbound-agent:4.11-1
+      image: brymat24/jnlp-dind:latest
       args: ['${computer.jnlpmac}', '${computer.name}']
       securityContext:
         privileged: true
       env:
         - name: DOCKER_HOST
           value: "tcp://127.0.0.1:2375"
-      command:
-        - sh
-        - -c
-        - |
-          apt-get update && \
-          apt-get install -y docker.io && \
-          while true; do sleep 30; done
     - name: docker-daemon
       image: docker:24-dind
       securityContext:
