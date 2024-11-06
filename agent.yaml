@@ -12,6 +12,10 @@ spec:
       env:
         - name: DOCKER_HOST
           value: "tcp://localhost:2375"
+        - name: "JENKINS_URL"
+          value: "http://jenkins-operator-http-jenkins.jenkins.svc.cluster.local:8080/"
+        - name: "JENKINS_TUNNEL"
+          value: "jenkins-operator-slave-jenkins.jenkins.svc.cluster.local:50000"
     - name: docker
       image: docker:20.10.7-dind
       securityContext:
