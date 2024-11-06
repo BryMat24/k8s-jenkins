@@ -6,14 +6,6 @@ metadata:
     app: jnlp-dind
 spec:
   containers:
-    - name: jnlp
-      image: brymat24/jnlp-dind:latest
-      args: ['${computer.jnlpmac}', '${computer.name}']
-      securityContext:
-        privileged: true
-      env:
-        - name: DOCKER_HOST
-          value: "tcp://127.0.0.1:2375"
     - name: docker-daemon
       image: docker:24-dind
       securityContext:

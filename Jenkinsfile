@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                     echo "Running in JNLP container with Docker"
-                    sh 'docker version'
+                    sh 'test'
                 }
             }
         }
