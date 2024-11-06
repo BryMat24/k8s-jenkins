@@ -8,6 +8,9 @@ spec:
   containers:
     - name: jnlp
       image: jenkins/inbound-agent:4.11-1
+      args: ['${computer.jnlpmac}', '${computer.name}']
+      securityContext:
+        privileged: true
       env:
         - name: DOCKER_HOST
           value: "tcp://127.0.0.1:2375"
