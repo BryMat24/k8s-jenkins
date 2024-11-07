@@ -6,6 +6,11 @@ pipeline {
     }
   }
   stages {
+    stage('Test1') {
+      steps {
+        echo "test"
+      }
+    }
     stage('Test') {
       agent {
         dockerfile {
