@@ -13,7 +13,7 @@ pipeline {
               privileged: true
             env:
             - name: DOCKER_HOST
-              value: "tcp://localhost:2375"
+              value: "tcp://docker:2375"
           - name: docker
             image: docker:20.10.7-dind
             securityContext:
