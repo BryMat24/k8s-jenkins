@@ -1,4 +1,9 @@
-FROM jenkins/inbound-agent:4.11-1
+FROM jenkins/inbound-agent:latest
+
 USER root
+
 RUN apt-get update && apt-get install -y docker.io
-USER jenkins
+
+ENV DOCKER_HOST=tcp://localhost:2375
+
+ENTRYPOINT ["/usr/local/bin/jenkins-agent"]
