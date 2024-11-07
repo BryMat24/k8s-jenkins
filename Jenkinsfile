@@ -9,6 +9,9 @@ pipeline {
           - name: jnlp
             image: 'jenkins/inbound-agent:latest'
             args: ['$(JENKINS_SECRET)', '$(JENKINS_NAME)']
+            env:
+            - name: DOCKER_HOST
+              value: "tcp://localhost:2375"
           - name: docker
             image: docker:20.10.7-dind
             securityContext:
