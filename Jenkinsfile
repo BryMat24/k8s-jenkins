@@ -25,6 +25,12 @@ pipeline {
             - dockerd
             args:
             - --host=tcp://0.0.0.0:2375
+            readinessProbe:
+              httpGet:
+                path: /_ping
+                port: 2375
+              initialDelaySeconds: 5
+              periodSeconds: 2
             volumeMounts:
             - name: docker-graph-storage
               mountPath: /var/lib/docker
@@ -36,21 +42,31 @@ pipeline {
     }
   }
   stages {
+    stage('Setup Docker CLI') {
+      steps {
+        container('test-container') {
+          sh '''
+            docker version
+          '''
+        }
+      }
+    }
     stage('Build Docker Image') {
       steps {
-        sh '''
-          docker version
-        '''
-        sh '''
-          docker build -t test-image:latest .
-        '''
+        container('test-container') {
+          sh '''
+            docker build -t test-image:latest .
+          '''
+        }
       }
     }
     stage('Cleanup') {
       steps {
-        sh '''
-          docker rmi test-image:latest || true
-        '''
+        container('test-container') {
+          sh '''
+            docker rmi test-image:latest || true
+          '''
+        }
       }
     }
   }
