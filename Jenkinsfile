@@ -6,14 +6,18 @@ pipeline {
     }
   }
   stages {
-    stage('Test') {
-      agent {
-        dockerfile {
-          filename 'Dockerfile'
+    stage('Build Docker Image') {
+      steps {
+        script {
+          def image = docker.build('test-image:latest')
         }
       }
+    }
+    stage('Cleanup') {
       steps {
-        echo "test"
+        sh """
+          docker rmi test-image:latest
+        """
       }
     }
   }
