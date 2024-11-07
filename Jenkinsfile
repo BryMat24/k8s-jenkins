@@ -8,11 +8,13 @@ pipeline {
   stages {
     stage('Test') {
       agent {
-          dockerfile {
-              filename 'Dockerfile'
-          }
+        dockerfile {
+          filename 'Dockerfile'
+        }
       }
-      echo "test"
+      steps {
+        echo "test"
+      }
     }
   }
 }
