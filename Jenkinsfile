@@ -15,9 +15,9 @@ pipeline {
     }
     stage('Cleanup') {
       steps {
-        script {
-          docker.image('test-image:latest').remove()
-        }
+        sh """
+          docker rmi test-image:latest
+        """
       }
     }
   }
