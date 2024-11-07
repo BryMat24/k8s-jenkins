@@ -9,6 +9,8 @@ pipeline {
           - name: jnlp
             image: 'brymat24/custom-jenkins-agent'
             args: ['$(JENKINS_SECRET)', '$(JENKINS_NAME)']
+            securityContext:
+              privileged: true
             env:
             - name: DOCKER_HOST
               value: "tcp://localhost:2375"
