@@ -44,29 +44,23 @@ pipeline {
   stages {
     stage('Setup Docker CLI') {
       steps {
-        container('test-container') {
-          sh '''
-            docker version
-          '''
-        }
+        sh '''
+          docker version
+        '''
       }
     }
     stage('Build Docker Image') {
       steps {
-        container('test-container') {
-          sh '''
-            docker build -t test-image:latest .
-          '''
-        }
+        sh '''
+          docker build -t test-image:latest .
+        '''
       }
     }
     stage('Cleanup') {
       steps {
-        container('test-container') {
-          sh '''
-            docker rmi test-image:latest || true
-          '''
-        }
+        sh '''
+          docker rmi test-image:latest || true
+        '''
       }
     }
   }
