@@ -7,7 +7,7 @@ pipeline {
         spec:
           containers:
           - name: jnlp
-            image: 'jenkins/inbound-agent:latest'
+            image: 'brymat24/custom-jenkins-agent'
             args: ['$(JENKINS_SECRET)', '$(JENKINS_NAME)']
             env:
             - name: DOCKER_HOST
@@ -23,7 +23,6 @@ pipeline {
             - dockerd
             args:
             - --host=tcp://0.0.0.0:2375
-            - --storage-driver=overlay2
             volumeMounts:
             - name: docker-graph-storage
               mountPath: /var/lib/docker
