@@ -6,25 +6,18 @@ pipeline {
     }
   }
   stages {
-    stage('Setup Docker CLI') {
-      steps {
-        sh '''
-          docker version
-        '''
-      }
-    }
     stage('Build Docker Image') {
       steps {
-        sh '''
-          docker build -t test-image:latest .
-        '''
+        script {
+          def image = docker.build('test-image:latest')
+        }
       }
     }
     stage('Cleanup') {
       steps {
-        sh '''
-          docker rmi test-image:latest || true
-        '''
+        script {
+          docker.image('test-image:latest').remove()
+        }
       }
     }
   }
