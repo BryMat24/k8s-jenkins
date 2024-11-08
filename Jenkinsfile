@@ -6,19 +6,13 @@ pipeline {
     }
   }
   stages {
-    stage('Test1') {
-      steps {
-        echo "test"
-      }
-    }
     stage('Test') {
-      agent {
-        dockerfile {
-          filename 'Dockerfile'
-        }
-      }
       steps {
-        echo "test"
+        container('test-container') {
+          sh '''
+            echo "Running test inside test-container..."
+          '''
+        }
       }
     }
   }
